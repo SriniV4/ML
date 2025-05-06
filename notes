@@ -1,0 +1,13 @@
+Linear Regression 
+
+Can modify to Binary Classification by letting > 0 -> 1, <= 0 -> -1
+
+Goal:
+    Predict real valued function that can be expressed as linear combination of inputs.
+
+Can be thought of as theta_T dot x + theta_0. This is some n ( dim(x) ) dimensional object in n+1-dimensional space on which you make predictions.
+
+Perceptron (Binary Classification):     
+    Iterate on input -> if we don't predict this correctly, then add this x to theta and y to theta_0 -> moves theta closer to x.
+
+Trick to train on non-linearities: Any function is a linear combination of kth degree polynomials as k approaches inf. Therefore, just add new features to input space: x_j^i for all until k and for all j until n.
