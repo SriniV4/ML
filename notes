@@ -11,3 +11,21 @@ Perceptron (Binary Classification):
     Iterate on input -> if we don't predict this correctly, then add this x to theta and y to theta_0 -> moves theta closer to x.
 
 Trick to train on non-linearities: Any function is a linear combination of kth degree polynomials as k approaches inf. Therefore, just add new features to input space: x_j^i for all until k and for all j until n.
+
+
+Proof of why Least Squared is best for linear regression: -> Maximum Likelihood Estimation
+    Define likelihood of parameters as probability of getting data given parameters
+    Since log is monotonic, we want to maximize log(likelihood)
+    We make few key assumptions: 
+        y = linearCombination(x) + error -> error is some noise 
+        Assume error is IID from normal(0 , mu^2)
+    Maximizing log(likelihood) comes out to same as minimize differences squared loss
+
+
+    Use same idea to see logistic regression -> Since we want to classify points that are not linearly seperable
+    Likelihood(theta) = prod(P(y | x , theta)) -> assume samples are iid
+    Want to find theta such that probability of getting input given current theta is maximized 
+    y is 0/1 -> our model says 1 with probability sigmoid(theta dot x) 
+    p(y|x , theta) = sigmoid(theta dot x)^y * (1-sigmoid(theta dot x))^(1-y)
+    log(l(theta)) = sum(log(P(y|x , theta))) = sum(ylog(sigmoid(theta dot x)) + (1-y)log(1 - sigmoid(theta dot x)))
+    We want to maximize log(l(theta))
