@@ -9,7 +9,7 @@ all_input = list(zip(all_input_features , all_input_labels))
 
 VAR = 5
 TAU = 10
-TRAINING_SIZE = 2 # in percent
+TRAINING_SIZE = 10 # in percent
 
 theta = [0 for i in range(VAR)]
 def diff(x , y): # >0 -> valid, else not valid
