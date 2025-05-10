@@ -4,10 +4,11 @@ import pandas
 import matplotlib
 
 ### Begin Hyper Parameters
-learning_rate = .001
-iterations = 1000
+learning_rate = .01
+iterations = 10000
 training_split = 50 # in percent
 stochastic = 0 # Using SGD or BGD
+tau = .01
 ### End Hyper Parameters
 
 ### Linear Regression
@@ -22,8 +23,5 @@ df.drop(columns=["Id"])
 matplotlib.pyplot.scatter(df["SepalLengthCm"].values.tolist() , df["SepalWidthCm"])
 all_data = [[[df["SepalLengthCm"].values.tolist()[i]] , df["SepalWidthCm"].values.tolist()[i]] for i in range(len(df))]
 linReg = glm.glm(function , guess , learning_rate , training_split , stochastic , iterations , all_data)
-model = linReg.train()
 loss = lambda guess, expected : (guess-expected)**2
-print(linReg.testLoss(model , function , loss))
-matplotlib.pyplot.plot([i for i in range(8)] , [guess(model , [1 , i]) for i in range(8)])
-matplotlib.pyplot.show()
+print(linReg.testLocallyWeightedLoss(tau , function , loss))
