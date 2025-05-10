@@ -4,11 +4,11 @@ import pandas
 import matplotlib
 
 ### Begin Hyper Parameters
-learning_rate = .01
+learning_rate = .001
 iterations = 10000
-training_split = 50 # in percent
+training_split = 10 # in percent
 stochastic = 0 # Using SGD or BGD
-tau = .01
+tau = 1
 ### End Hyper Parameters
 
 ### Linear Regression
