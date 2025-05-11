@@ -8,7 +8,7 @@ learning_rate = .001
 iterations = 10000
 training_split = 10 # in percent
 stochastic = 0 # Using SGD or BGD
-tau = 1
+tau = 1 ## width of local -> higher tau -> local region is much bigger (quadratic inc/dec)
 ### End Hyper Parameters
 
 ### Linear Regression
