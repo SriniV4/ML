@@ -5,10 +5,10 @@ import matplotlib
 
 ### Begin Hyper Parameters
 learning_rate = .001
-iterations = 10000
-training_split = 10 # in percent
-stochastic = 0 # Using SGD or BGD
-tau = 1 ## width of local -> higher tau -> local region is much bigger (quadratic inc/dec)
+iterations = 1000
+training_split = 20 # in percent
+stochastic = 1 # Using SGD or BGD
+tau = .8 ## width of local -> higher tau -> local region is much bigger (quadratic inc/dec)
 ### End Hyper Parameters
 
 ### Linear Regression
@@ -18,7 +18,6 @@ guess = function
 
 
 df = pandas.read_csv("Iris.csv")
-df = df[df["Species"] == "Iris-setosa"]
 df.drop(columns=["Id"])
 matplotlib.pyplot.scatter(df["SepalLengthCm"].values.tolist() , df["SepalWidthCm"])
 all_data = [[[df["SepalLengthCm"].values.tolist()[i]] , df["SepalWidthCm"].values.tolist()[i]] for i in range(len(df))]

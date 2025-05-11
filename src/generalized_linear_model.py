@@ -41,11 +41,11 @@ class glm:
                         weight = lambda input: math.exp(-sum([(inp[i] - input[i])**2 for i in range(len(input))])/(2 * tau**2))
                         hypothesis = self.train(weight)
                         ### Uncomment for default Iris code -> show line fitting each data
-                        # plt.xlim(3 , 8)
-                        # plt.ylim(2 , 5)
+                        # plt.xlim(4 , 9)
+                        # plt.ylim(1, 6)
                         # plt.scatter([a[0][1] for a in self.training + self.testing] , [a[1] for a in self.training+self.testing])
                         # plt.plot([i for i in range(4 , 8)] , [self.guess(hypothesis , [1 , i]) for i in range(4 , 8)])
-                        # plt.show(block = False)
+                        # plt.show()
                         # print(hypothesis)
                         ###
                         loss += lossFunction(function(hypothesis , inp) , out)
@@ -61,4 +61,4 @@ class glm:
                 # return gradient
                 return [gradient[i]/m for i in range(features)]
         def gradientStoch(self ,  example, hypothesis , weight): # return gradient of single example
-                return weight(example[0]) * [example[0][i] * (example[1] - self.function(hypothesis , example[0])) for i in range(len(hypothesis))]
+                return [weight(example[0]) * example[0][i] * (example[1] - self.function(hypothesis , example[0])) for i in range(len(hypothesis))]
