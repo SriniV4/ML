@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 import matplotlib.pyplot
 import generalized_linear_model as glm
 import pandas

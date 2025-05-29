@@ -36,8 +36,12 @@ class K_Means:
             if(np.array((self.centers == self.newCenters)).all()):
                 break
             self.centers = self.newCenters
+            self.counts = self.newCounts
     def getCenters(self):
         return self.centers
+    def getProbs(self):
+        return self.counts / np.array(len(self.data))
+    
                     
 
 

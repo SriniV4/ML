@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 import pandas as pd
 import matplotlib.pyplot as plt
 import random
@@ -8,7 +11,7 @@ import generalized_linear_model as glm
 learning_rate = .01
 training_split = 20 # in percent
 stochastic = 1
-iterations = 5000
+iterations = 50000
 ###
 
 ### Functions

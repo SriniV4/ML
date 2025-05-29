@@ -29,3 +29,47 @@ Proof of why Least Squared is best for linear regression: -> Maximum Likelihood 
     p(y|x , theta) = sigmoid(theta dot x)^y * (1-sigmoid(theta dot x))^(1-y)
     log(l(theta)) = sum(log(P(y|x , theta))) = sum(ylog(sigmoid(theta dot x)) + (1-y)log(1 - sigmoid(theta dot x)))
     We want to maximize log(l(theta))
+
+Above were examples of Discriminative learning algos -> make model to estimate P(y | x)
+
+Another type of model is generative -> estimate P(x | y) and P(y). Then, using bayes rules, we can find P(y | x) = P(x|y)*P(y) / P(x), where P(x) = sum(P(x|y) * P(y)) across all y
+GDA Model:
+    Gaussian Discriminant Analysis
+    Assume each label's data is distributed gaussian with some mean mu_j and covariance sigma ( usually use same sigma for ALL labels )
+    This means P(x | y = j) ~ N(mu_j , sigma).
+    Our goal is to find values of mu_j , sigma that maximize the likelihood of sampling the data. -> MLE!
+    This time, instead of using likelihood of parameters = P(y | x), we need to use likelihood of paramters = P(y , x) -> a joint distribution on y and x
+    We can simply just plug in the values we saw above ( P(x|y) is gaussian, P(y) is multinomial ) and take derivatives.
+    We get the intuitive results for optimal values of mu_j and sigma:
+        mu_j = average( all points with label j )
+        sigma = average ( cov of data point with its average label ) -> average( outerProduct(x_i - mu_j) )
+
+
+Unsupervised Learning:
+    No Labels for data. Find patterns
+
+K - means:
+        As name suggest, find k "means" for the data ( clusters ). 
+        Simple algo:
+            - Choose k centers to start ( randomly, randomly from the data, or k-means++ (below))
+            - Color each data point with the center it is closest to
+            - Reassign each center to the average of the colored points for that center
+            - Repeat color + reassignment
+        Problem with random:
+            Even if we choose randomly from the data, if we choose 2 points belonging to the same "cluster" ( obviously we don't know any cluster because data is unlabled ), we converge to bad centers.
+        Fix:
+            k-means++ -> choose first center randomly, second center is point that is farthest away from all centers ( argmax(min dist to any center) )
+            this spreads out starting centers more
+
+Mixture of Gaussians Model:
+    Goal: Density Estimation
+    or in other words, find a model for P(x).
+
+    Assume data is drawn from multiple (k) gaussians. Find mu_j, sigma_j for each gaussian and z_j ( latent random variable ) which is multinomial, telling you probability of each gaussian
+    Intuitive expl of EM:
+        We know from GDA:
+            if we knew z_j, we could just use GDA to find best values of gaussians.
+        So, if we can fix, z_j, find optimal values, and from those, find better values of z_j, and repeat, we will converge to at least local max ( of log likelihood )
+    EM:
+        Log liklihood can be lower bounded using Jensen's inequality -> using latent probability distribution
+        Find tight lower bound, then maximize this lower bound, then repeat.

@@ -1,3 +1,6 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 from k_means import K_Means as km
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,8 +12,8 @@ param = [[[-10 , -10] , np.eye(2)] , [[-5 , 5] , np.eye(2)] , [[5 , 5] , np.eye(
 ###
 
 k = [[np.random.default_rng().multivariate_normal(mean = mu , cov = cov) for i in range(size)] for (mu , cov) in param]
-
 total = sum(k , [])
+
 model = km(total , len(param))
 model.train(10000)
 centers = model.getCenters()
