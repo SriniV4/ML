@@ -33,6 +33,17 @@ Proof of why Least Squared is best for linear regression: -> Maximum Likelihood 
 Above were examples of Discriminative learning algos -> make model to estimate P(y | x)
 
 Another type of model is generative -> estimate P(x | y) and P(y). Then, using bayes rules, we can find P(y | x) = P(x|y)*P(y) / P(x), where P(x) = sum(P(x|y) * P(y)) across all y
+Naive Bayes:
+    Discrete data -> feature vector of booleans. -> Want to model p(x | y) and p(y). 
+    Key assumption: 
+        Assume each feature is conditionally independent of others -> Given the label y, probability of seeing a feature i is independent of seeing a feature j.
+        This allows us to say P(x | y) = prod(P(x_i | y)) across all features. Now just using MLE and intuition, we can see that P(x_i = k | y = Y) should simply just be the proprtion of sample data that satisfy x_i = k and y = Y.
+    Now we can efficiently answer queries
+
+    Only problem: We have found P(x | y) by finding P(x_i=k , y = Y) for the sample. If we havent seen some feature in the sample, we would assign it 0 probability during test time.
+    This not only casuses mathematical issues, but is also statistically not what we want -> we want it to have non zero low probability. 
+    Trick: Using Laplace Smoothing
+        add 1 to every feature you are counting on numerator and denominator -> this way the probability is never truly 1 or 0.
 GDA Model:
     Gaussian Discriminant Analysis
     Assume each label's data is distributed gaussian with some mean mu_j and covariance sigma ( usually use same sigma for ALL labels )
